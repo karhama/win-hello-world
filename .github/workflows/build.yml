@@ -32,7 +32,7 @@ jobs:
           endpoint: https://weu.codesigning.azure.net
           trusted-signing-account-name: aztsawe01
           certificate-profile-name: aztsapcert01
-          files-folder: ${{ github.workspace }}\cpp\Debug
+          files-folder: ${{ github.workspace }}\cpp\Release
           files-folder-filter: exe,dll
           file-digest: SHA256
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: cpp/Debug
+          path: cpp/Release
