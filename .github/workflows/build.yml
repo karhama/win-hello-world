@@ -21,7 +21,7 @@ jobs:
           msbuild-architecture: x64
         
       - name: Build Solution
-        run: msbuild cpp/HelloWorld.sln
+        run: msbuild cpp/HelloWorld.sln /p:Configuration=Release
 
       - name: Sign files with Trusted Signing
         uses: azure/trusted-signing-action@v0
