@@ -20,9 +20,24 @@ jobs:
         
       - name: Build Solution
         run: msbuild cpp/HelloWorld.sln
+
+      - name: Sign files with Trusted Signing
+        uses: azure/trusted-signing-action@v0
+        with:
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          endpoint: https://eus.codesigning.azure.net/
+          trusted-signing-account-name: aztsawe01
+          certificate-profile-name: aztsapcert01
+          files-folder: ${{ github.workspace }}\cpp\Debug
+          files-folder-filter: exe,dll
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
   
       - name: Archive Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: cpp/*
+          path: cpp/Debug
